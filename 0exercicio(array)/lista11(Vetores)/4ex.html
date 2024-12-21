@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Insira seus filmes favoritos: <input type="text" name="" id="ipt_filme"><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="favoritos()">Ver Favoritos</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+
+<script>
+    var listaDeFilmes = [];
+
+    function cadastrar() {
+        var filme = ipt_filme.value;
+        if (filme.trim() !== "") {  // Verifica se o campo não está vazio
+            listaDeFilmes.push(filme);
+            ipt_filme.value = ''; // Limpa o campo de entrada
+            console.log(listaDeFilmes); // Exibe a lista no console para depuração
+        } else {
+            alert('Por favor, insira um nome de filme');
+        }
+    }
+
+    function favoritos() {
+        var mensagem = '';
+
+        if (listaDeFilmes.length === 0) {
+            mensagem = 'Você ainda não cadastrou nenhum filme.';
+        } else {
+            // Criar uma string manualmente, sem usar join()
+            mensagem += 'Seus filmes favoritos são: <b>';
+            for (var i = 0; i < listaDeFilmes.length; i++) {
+                // Adiciona o nome do filme e, se não for o último, coloca uma vírgula
+                mensagem += listaDeFilmes[i];
+                if (i < listaDeFilmes.length - 1) {
+                    mensagem += ', ';
+                }
+            }
+            mensagem += '</b><br>';
+            
+            mensagem += `Total: ${listaDeFilmes.length}<br>`;
+
+            // Mostrar o filme mais favorito (primeiro) e o menos favorito (último)
+            var filmeMaisFavorito = listaDeFilmes[0]; // Primeiro filme
+            var filmeMenosFavorito = listaDeFilmes[listaDeFilmes.length - 1]; // Último filme
+
+            mensagem += `O filme que você mais gosta é: <b>${filmeMaisFavorito}</b><br>`;
+            mensagem += `E o filme que você menos gosta é: <b>${filmeMenosFavorito}</b><br>`;
+        }
+
+        // Exibe a mensagem na tela
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>

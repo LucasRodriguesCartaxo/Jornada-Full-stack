@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Músicas Favoritas</title>
+</head>
+<body>
+    <h1>Músicas Favoritas</h1>
+
+    
+    Nome da música: <input type="text" id="input_musica"><br>
+    <button onclick="cadastrarMusica()">Cadastrar</button>
+    <button onclick="exibirMusicas()">Exibir</button>
+
+    
+    <h2>Lista de Músicas</h2>
+    <div id="div_musicas"></div>
+
+   
+    <h2>Filtrar por Intervalo</h2>
+    De: <input type="number" id="input_de"><br>
+    Até: <input type="number" id="input_ate"><br>
+    <button onclick="filtrarMusicas()">Filtrar</button>
+
+    
+    <h2>Resultado do Filtro</h2>
+    <div id="div_filtro"></div>
+</body>
+</html>
+
+<script>
+    var musicas = [];
+
+    // Função para cadastrar uma nova música
+    function cadastrarMusica() {
+        var musica = input_musica.value;
+
+        if (musica) {
+            musicas.push(musica);
+            input_musica.value = ''; 
+        } else {
+            alert("Por favor, insira o nome de uma música.");
+        }
+    }
+
+    // Função para exibir todas as músicas cadastradas
+    function exibirMusicas() {
+        var lista = '';
+        
+        for (var i = 0; i < musicas.length; i++) {
+            lista += `${i + 1}º Música: ${musicas[i]}<br>`;
+        }
+
+        div_musicas.innerHTML = lista;
+    }
+
+    // Função para filtrar músicas dentro do intervalo especificado
+    function filtrarMusicas() {
+        var de = parseInt(input_de.value) - 1;
+        var ate = parseInt(input_ate.value) - 1;
+        var resultado = '';
+
+        if (isNaN(de) || isNaN(ate) || de < 0 || ate >= musicas.length || de > ate) {
+            alert("Intervalo inválido! Por favor, insira um intervalo válido.");
+        } else {
+            for (var i = de; i <= ate; i++) {
+                resultado += `${i + 1}º Música: ${musicas[i]}<br>`;
+            }
+        }
+
+        div_filtro.innerHTML = resultado;
+    }
+</script>

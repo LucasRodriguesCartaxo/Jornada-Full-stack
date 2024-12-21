@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Second exercice for array(JP)</title>
+</head>
+
+<body>
+    Destino de viagem: <input type="text" id="ipt_viagem"><br>
+    <button onclick="ver()">Adicionar</button>
+    <button onclick="primeira()">Primeira viagem</button>
+    <button onclick="terceira()">Terceira viagem</button>
+    <button onclick="ultima()">Ultima viagem</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    // Declare a listaViagem fora das funções para que seja acessível em todas elas
+    var listaViagem = []
+
+
+    function ver() {
+        var mensagem = '';
+        var destino = ipt_viagem.value; // guardando o valor que o usuario digitou na minha variavel;
+
+        // Adiciona o destino ao array
+        listaViagem.push(destino) // estou adicionando no meu array oq o usuario colocou;
+        ipt_viagem.value = ''; // limpa o campo de entrada
+        console.log(listaViagem);
+    }
+
+    function primeira() {
+        var mensagem = '';
+        if (listaViagem.length > 0) {
+            mensagem += `Primeira viagem: ${listaViagem[0]}`;
+        } else {
+            mensagem += `Ainda não viajou`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+
+    function terceira() {
+        var mensagem = '';
+
+        if (listaViagem.length > 2) {
+            mensagem += `Terceira viagem: ${listaViagem[2]}`;
+        } else {
+            mensagem += `Ainda não fez a terceira viagem`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+
+    function ultima() {
+        var mensagem = '';
+
+        if (listaViagem.length > 0) {
+            mensagem += `Sua ultima viagem foi para ${listaViagem[listaViagem.length -1]}`;      
+         // estou acessando a variavel listaVigem e com array estou fazendo a subtração de um elemento para saber o ultimo indice;
+        }else{
+            mensagem +=` Ainda não viajou`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>
+
+
+<!-- a) Tenha um campo "Destino de viagem" e um botão "Adicionar";
+
+b) Ao clicar no botão, esse destino deve ser adicionado a uma lista (que não aparece para o usuário). 
+
+Obs: Não existe problema em serem registrados valores repetidos.
+
+c) Devem haver os botões: 
+
+  "Primeira viagem" - Ao ser clicado, aparece abaixo o primeiro local cadastrado ou "Ainda não viajou" - caso nenhuma (zero viagens) viagem tenha sido registrada;
+
+  "Terceira viagem" - Ao ser clicado, aparece abaixo o terceiro local cadastrado ou "Ainda fez a terceira viagem", caso não tenha feito, ao menos, três viagens;
+
+  "Última viagem" - Ao ser clicado, aparece abaixo o último local cadastrado ou "Ainda não viajou", caso nenhuma (zero viagens) viagem tenha sido registrada. -->

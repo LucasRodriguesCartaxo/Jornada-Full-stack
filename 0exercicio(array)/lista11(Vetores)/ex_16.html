@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Estoque</title>
+</head>
+<body>
+    Nome do produto: <input type="text" id="input_nome"><br>
+    Preço de compra: <input type="number" id="input_preco" step="0.01"><br>
+    <button onclick="cadastrarProduto()">Cadastrar</button>
+    <button onclick="gerarRelatorio()">Relatório de estoque</button>
+    <div id="div_relatorio"></div>
+</body>
+</html>
+
+<script>
+    // Vetores para armazenar nome dos produtos e preços de compra
+    var nomesProdutos = [];
+    var precosCompra = [];
+
+    function cadastrarProduto() {
+        // Coleta os valores dos inputs
+        var nome = input_nome.value;
+        var precoCompra = parseFloat(input_preco.value);
+
+        // Adiciona os valores nos vetores correspondentes
+        nomesProdutos.push(nome);
+        precosCompra.push(precoCompra);
+
+        // Limpa os campos de entrada após o cadastro
+        input_nome.value = '';
+        input_preco.value = '';
+    }
+
+    function gerarRelatorio() {
+        var relatorio = `Total de produtos: ${nomesProdutos.length}<br><br>`;
+        var somaPrecosCompra = 0;
+        var somaPrecosVenda = 0;
+
+        // Variáveis para identificar o produto mais caro e o mais barato
+        var maiorPreco = precosCompra[0];
+        var menorPreco = precosCompra[0];
+        var nomeMaisCaro = nomesProdutos[0];
+        var nomeMaisBarato = nomesProdutos[0];
+
+        // Gera o relatório percorrendo os vetores
+        for (var i = 0; i < nomesProdutos.length; i++) {
+            var precoCompra = precosCompra[i];
+            var precoVenda = (precoCompra * 1.25).toFixed(2); // Calcula o preço de venda (compra + 25%)
+            
+            relatorio += `Produto ${i + 1}: ${nomesProdutos[i]}<br>`;
+            relatorio += `Preço de compra: R$${precoCompra.toFixed(2)}. Vender por R$${precoVenda}<br><br>`;
+            
+            // Soma para o preço total de compra e preço total de venda
+            somaPrecosCompra += precoCompra;
+            somaPrecosVenda += parseFloat(precoVenda);
+
+            // Verifica se o produto atual é o mais caro ou o mais barato
+            if (precoCompra > maiorPreco) {
+                maiorPreco = precoCompra;
+                nomeMaisCaro = nomesProdutos[i];
+            }
+            if (precoCompra < menorPreco) {
+                menorPreco = precoCompra;
+                nomeMaisBarato = nomesProdutos[i];
+            }
+        }
+
+        // Calcula a média dos preços de venda
+        var mediaPrecosVenda = (somaPrecosVenda / nomesProdutos.length).toFixed(2);
+
+        // Adiciona as informações finais ao relatório
+        relatorio += `<strong>Resumo do Estoque:</strong><br>`;
+        relatorio += `Produto mais caro: ${nomeMaisCaro} - R$${maiorPreco.toFixed(2)}<br>`;
+        relatorio += `Produto mais barato: ${nomeMaisBarato} - R$${menorPreco.toFixed(2)}<br>`;
+        relatorio += `Soma dos preços de compra: R$${somaPrecosCompra.toFixed(2)}<br>`;
+        relatorio += `Média dos preços de venda: R$${mediaPrecosVenda}<br>`;
+
+        // Exibe o relatório no div correspondente
+        div_relatorio.innerHTML = relatorio;
+    }
+</script>

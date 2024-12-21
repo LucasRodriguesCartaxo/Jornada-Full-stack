@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Estoque</title>
+</head>
+<body>
+    Nome do produto: <input type="text" id="input_nome"><br>
+    Preço de compra: <input type="number" id="input_preco" step="0.01"><br>
+    <button onclick="cadastrarProduto()">Cadastrar</button>
+    <button onclick="gerarRelatorio()">Relatório de estoque</button>
+    <div id="div_relatorio"></div>
+</body>
+</html>
+
+<script>
+    
+    var nomesProdutos = [];
+    var precosCompra = [];
+
+    function cadastrarProduto() {
+        // Coleta os valores dos inputs
+        var nome = input_nome.value;
+        var precoCompra = parseFloat(input_preco.value);
+
+        
+        nomesProdutos.push(nome);
+        precosCompra.push(precoCompra);
+
+        
+        input_nome.value = '';
+        input_preco.value = '';
+    }
+
+    function gerarRelatorio() {
+        var relatorio = `Total de produtos: ${nomesProdutos.length}<br><br>`;
+
+        
+        for (var i = 0; i < nomesProdutos.length; i++) {
+            var precoVenda = (precosCompra[i] * 1.25).toFixed(2); // Calcula o preço de venda (compra + 25%)
+            relatorio += `Produto ${i + 1}: ${nomesProdutos[i]}<br>`;
+            relatorio += `Preço de compra: R$${precosCompra[i].toFixed(2)}. Vender por R$${precoVenda}<br><br>`;
+        }
+
+        
+        div_relatorio.innerHTML = relatorio;
+    }
+</script>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+</head>
+
+<body>
+    <!-- Campo para digitar o nome do produto -->
+    <p>Nome:</p>
+    <input id="ipt_nome" type="text">
+    <!-- Campo para digitar o código único do produto -->
+    <p>Código:</p>
+    <input id="ipt_codigo" type="text">
+    <!-- Campo para digitar a quantidade inicial do produto -->
+    <p>Quantidade do Produto:</p>
+    <input id="ipt_qtd" type="number"><br>
+    <!-- Botão para cadastrar um novo produto -->
+    <button onclick="cadastrar()">Cadastrar Produto</button><br>
+    <!-- Botão para repor o estoque de um produto existente -->
+    <button onclick="repor()">Repor Estoque</button><br>
+    <!-- Botão para realizar uma venda de um produto -->
+    <button onclick="vender()">Vender Produto</button><br>
+    <!-- Botão para exibir o relatório completo do estoque -->
+    <button onclick="exibir()">Exibir Relatório</button><br>
+    <!-- Div para mostrar mensagens e relatórios na tela -->
+    <div id="div_mens"></div>
+</body>
+
+</html>
+
+<script>
+    // Listas que armazenam os dados dos produtos: nome, código e quantidade
+    var lista_nome = [];
+    var lista_codigo = [];
+    var lista_qtd = [];
+
+    // Função para cadastrar um novo produto no estoque
+    function cadastrar() {
+        // Obtém os valores digitados pelo usuário nos campos de entrada
+        var nome = ipt_nome.value;
+        var codigo = ipt_codigo.value;
+        var qtd = Number(ipt_qtd.value);
+        // Verifica se o código já existe na lista
+        var codigoSim = lista_codigo.includes(codigo);
+        var msg = '';
+
+        // Validações:
+        // 1. Campos não podem estar vazios e quantidade deve ser maior que 10
+        if (nome == '' || codigo == '' || qtd == '' || qtd <= 10) {
+            msg = 'Preencha todos os campos para registrar um novo produto';
+        }
+        // 2. O código do produto deve ser único
+        else if (codigoSim) {
+            msg = 'Código de produto já existente';
+        }
+        // Caso esteja tudo correto, adiciona o produto às listas
+        else {
+            lista_nome.push(nome);
+            lista_codigo.push(codigo);
+            lista_qtd.push(qtd);
+            
+            console.log(lista_nome);
+            console.log(lista_codigo);
+            console.log(lista_qtd);
+            msg = `Produto ${nome} registrado com sucesso`;
+        }
+
+        // Mostra a mensagem final na tela
+        div_mens.innerHTML = msg;
+    }
+
+    // Função para repor o estoque de um produto
+    function repor() {
+        // Obtém os valores digitados pelo usuário
+        var nome = ipt_nome.value;
+        var codigo = ipt_codigo.value;
+        var qtd = Number(ipt_qtd.value);
+        // Localiza a posição do produto nas listas pelo código e nome
+        var codigoPosicao = lista_codigo.indexOf(codigo);
+        var nomePosicao = lista_nome.indexOf(nome);
+        var msg = '';
+        var reposicao = 'OK';
+
+        // Validações:
+        // 1. Código e nome devem existir e corresponder à mesma posição
+        if (codigoPosicao < 0 || nomePosicao < 0 || codigoPosicao != nomePosicao) {
+            msg = 'Produto não identificado';
+        }
+        // 2. Quantidade deve ser maior que 0
+        else if (qtd <= 0) {
+            msg = 'Quantidade inválida';
+        }
+        // Caso esteja tudo correto, adiciona a quantidade ao estoque
+        else {
+            lista_qtd[nomePosicao] += qtd;
+            msg = `${qtd}x do ${nome} foi reposto com sucesso`;
+            // Verifica se o estoque está abaixo do mínimo após a reposição
+            if (lista_qtd[nomePosicao] < 10) {
+                reposicao = 'Precisa Repor';
+            }
+            // Adiciona informações do estoque à mensagem
+            msg += `<br> Código: ${codigo} | Produto: ${nome} | Quantidade em Estoque: ${lista_qtd[nomePosicao]} (${reposicao})`;
+        }
+
+        // Mostra a mensagem final na tela
+        div_mens.innerHTML = msg;
+    }
+
+    // Função para vender um produto
+    function vender() {
+        // Obtém os valores digitados pelo usuário
+        var nome = ipt_nome.value;
+        var codigo = ipt_codigo.value;
+        var qtd = Number(ipt_qtd.value);
+        // Localiza a posição do produto nas listas pelo código e nome
+        var codigoPosicao = lista_codigo.indexOf(codigo);
+        var nomePosicao = lista_nome.indexOf(nome);
+        console.log(codigoPosicao);
+        var msg = '';
+        var reposicao = 'OK';
+
+        // Validações:
+        // 1. Código e nome devem existir e corresponder à mesma posição
+        if (codigoPosicao < 0 || nomePosicao < 0 || codigoPosicao != nomePosicao) {
+            msg = 'Produto não identificado';
+        }
+        // 2. Não pode vender mais do que há no estoque
+        else if (qtd > lista_qtd[nomePosicao]) {
+            msg = 'Quantidade inválida';
+        }
+        // Caso esteja tudo correto, reduz a quantidade do estoque
+        else {
+            lista_qtd[nomePosicao] -= qtd;
+            msg = `${qtd}x do ${nome} foi vendido com sucesso`;
+            // Verifica se o estoque está abaixo do mínimo após a venda
+            if (lista_qtd[nomePosicao] < 10) {
+                alert(`Repor o produto ${nome} urgente!`);
+                reposicao = 'Precisa Repor';
+            }
+            // Adiciona informações do estoque à mensagem
+            msg += `<br> Código: ${codigo} | Produto: ${nome} | Quantidade em Estoque: ${lista_qtd[nomePosicao]} (${reposicao})`;
+        }
+
+        // Mostra a mensagem final na tela
+        div_mens.innerHTML = msg;
+    }
+
+    // Função para exibir o relatório completo do estoque
+    function exibir() {
+        var msg = '';
+        var reposicao = 'OK';
+        var qtd_total = 0;
+        var tamanho = lista_qtd.length;
+
+        // Percorre todas as categorias/produtos no estoque
+        for (var i = 0; i < tamanho; i++) {
+            var qtd_atual = lista_qtd[i];
+            qtd_total += qtd_atual;
+            // Verifica se o estoque do produto está abaixo do mínimo
+            if (qtd_atual < 10) {
+                reposicao = 'Precisa Repor';
+            } else {
+                reposicao = 'OK';
+            }
+            // Adiciona as informações do produto ao relatório
+            msg += `
+            Categoria ${i + 1} - Código: ${lista_codigo[i]} | Produto: ${lista_nome[i]} | Quantidade em Estoque: ${qtd_atual} (${reposicao})<br>
+            `;
+        }
+        // Adiciona o resumo total do estoque ao final do relatório
+        msg += `Seu estoque tem ${qtd_total} produtos registrados, sendo ${tamanho} categorias diferentes<br>`;
+
+        // Mostra o relatório na tela
+        div_mens.innerHTML = msg;
+    }
+</script>

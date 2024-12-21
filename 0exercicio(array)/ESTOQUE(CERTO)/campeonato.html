@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div_conteudo">
+        <p>Nome:</p>
+        <input type="text" id="ipt_nome">
+        <button onclick="cadastrar()">Cadastrar Nome</button>
+        <button onclick="irRegistro()">Ir para Registro de Pontuaçoes</button>
+        <div id="div_mens"></div>
+    </div>
+    <div id="div_registro"></div>
+</body>
+
+</html>
+<script>
+    var lista_jogadores = [];
+    var lista_pontos = [];
+    function cadastrar() {
+        var nome = ipt_nome.value;
+        var jogagor = lista_jogadores.includes(nome);
+
+        if (nome == '') {
+            msg = `<span style = "color: #ff0000;"><Campo nome tem que ser preenchido</span>`;
+        } else if (jogagor) {
+            msg = `<span style = "color: #ff0000;">Jogador já cadastrado</span>`
+        } else {
+            msg = `<span style = "color:#00ff00;">Jogador ${nome} cadastro com sucesso!</span>`
+        }
+        div_mens.innerHTML = msg
+
+        function irRegistro() {
+            var msg = '';
+            if (lista_jogadores.length < 0) {
+                div_mens.innerHTML = `Não há jogadores nesse campeonato!`;
+            } else {
+                div_conteudo.style.display = 'none';
+                var ultimoPonto = lista_pontos.indexOf[lista_pontos.length - 1]
+                div_registro.innerHTML = `<input id='ipt_ponto' type = "number"> <br>
+                                        <button onclick="registrar()">Finalizar e Exibir resultados</button>
+                                        <button onclick = "verResultado()"Finalizar Resultados</button>`
+            }
+        }
+    }
+</script>

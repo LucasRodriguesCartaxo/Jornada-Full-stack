@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes Vistos</title>
+</head>
+<body>
+    <h1>Cadastro de Filmes Vistos</h1>
+
+    
+    Nome do filme: <input type="text" id="input_filme"><br>
+    <button onclick="cadastrarFilme()">Cadastrar</button>
+
+    
+    <div id="div_contagem"></div><br>
+
+    
+    <button onclick="listarFilmes()">Listar Filmes</button>
+
+    
+    <div id="div_filmes"></div><br>
+
+    
+    <h2>Filtrar Filmes</h2>
+    De: <input type="number" id="input_de"><br>
+    Até: <input type="number" id="input_ate"><br>
+    <button onclick="filtrarFilmes()">Filtrar Filmes</button>
+
+   
+    <div id="div_filtro"></div>
+
+</body>
+</html>
+
+<script>
+    var filmes = [];
+
+    // Função para cadastrar um novo filme
+    function cadastrarFilme() {
+        var filme = input_filme.value;
+
+        if (filme) {
+            filmes.push(filme);
+            input_filme.value = ''; 
+            atualizarContagem(); // Atualiza a contagem de filmes
+        } else {
+            alert("Por favor, insira o nome de um filme.");
+        }
+    }
+
+    // Função para atualizar a contagem de filmes cadastrados
+    function atualizarContagem() {
+        var contagem = filmes.length;
+        div_contagem.innerHTML = `Você já assistiu ${contagem} filmes`;
+    }
+
+    // Função para listar os filmes em ordem inversa
+    function listarFilmes() {
+        var lista = '';
+        
+        for (var i = filmes.length - 1; i >= 0; i--) {
+            lista += `${i + 1}º Filme: ${filmes[i]}<br>`;
+        }
+
+        div_filmes.innerHTML = lista;
+    }
+
+    
+    function filtrarFilmes() {
+        var de = parseInt(input_de.value) - 1; // Ajusta o índice para a contagem começar do 1
+        var ate = parseInt(input_ate.value) - 1; // Ajusta o índice para a contagem começar do 1
+        var resultado = '';
+
+        if (isNaN(de) || isNaN(ate) || de < 0 || ate >= filmes.length || de > ate) {
+            alert("Intervalo inválido! Por favor, insira um intervalo válido.");
+        } else {
+            // Filtra e exibe os filmes no intervalo solicitado, em ordem inversa
+            for (var i = ate; i >= de; i--) {
+                resultado += `${i + 1}º Filme: ${filmes[i]}<br>`;
+            }
+        }
+
+        div_filtro.innerHTML = resultado;
+    }
+</script>

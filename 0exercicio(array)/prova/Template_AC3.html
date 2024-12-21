@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tênis Clube SPTECH</title>
+  <style>
+    body {
+      display: flex;
+      align-items: stretch;
+    }
+
+    body div:first-child,
+    body div:nth-of-type(2) {
+      padding: 8px;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    body div:nth-of-type(2) {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <label for="input_qtd_rodadas">
+      Rodadas máximas:
+      <input id="input_qtd_rodadas" /><br />
+    </label>
+
+    <button onclick="realizarRodada()">Realizar rodada</button>
+
+    <h3>Informe as rodadas que deseja relembrar</h3>
+
+    <label for="input_inicio_intervalo">Início:</label>
+    <input id="input_inicio_intervalo" />
+    <label for="input_fim_intervalo">Fim:</label>
+    <input id="input_fim_intervalo" />
+
+    <button onclick="relembrarRodadas()">Relembrar</button>
+    <br />
+    <br />
+
+    <button onclick="exibirHistorico()">Histórico da Partida</button>
+  </div>
+  <div>
+    <h3>Painel</h3>
+    <div id="div_painel"></div>
+  </div>
+</body>
+
+</html>
+<script>
+  var ListaDeRodadas = [];
+  var PontosDosJogadores = []
+
+  function realizarRodada() {
+    var msg = '';
+    var qtdRodadas = Number(input_qtd_rodadas.value);
+
+
+
+    if (qtdRodadas == 0) {
+      alert('Rodadas máximas inválidas')
+    } else {
+      ListaDeRodadas.push(qtdRodadas);
+      console.log(ListaDeRodadas);
+      var primeiroJogador = Math.random().toFixed(1) * (10 - 1) + 1;
+      var primeiroJogadorPARSE = parseInt(primeiroJogador);
+
+      var segundoJogador = Math.random().toFixed(1) * (10 - 1) + 1
+      var segundoJogadorPARSE = parseInt(segundoJogador);
+
+
+
+      PontosDosJogadores.push(primeiroJogadorPARSE);    // primeiro jogador é par [0,2,4]
+      PontosDosJogadores.push(segundoJogadorPARSE);      // segundo jogador vai ser impar[1,3,5]
+
+      console.log(PontosDosJogadores)
+
+      var qtd_totalPrimeiroJogador = 0
+      var qtd_totalSegundoJogador = 0
+
+      for (var i = 0; i < PontosDosJogadores.length; i++) {
+
+
+        if (i % 2 == 0) {
+          var qtd_atualPrimeiro = PontosDosJogadores[i]
+          qtd_totalPrimeiroJogador += qtd_atualPrimeiro;
+          msg += `Pontos Jogador 1: ${PontosDosJogadores[i]} 
+                     <br>`
+          console.log(qtd_totalPrimeiroJogador)
+        } else {
+          var qtd_atualSegundo = PontosDosJogadores[i]
+          qtd_totalSegundoJogador += qtd_atualSegundo;
+          msg += `Pontos jogador 2: ${PontosDosJogadores[i]}<br><br>`
+          console.log(qtd_totalSegundoJogador)
+
+        }
+
+      }
+      div_painel.innerHTML = msg = msg += `Total Jogador1:${qtd_totalPrimeiroJogador}<br>
+             Total Jogador2:${qtd_totalSegundoJogador}<br>`
+    }
+  }
+
+  function relembrarRodadas() {
+    var inicio = Number(input_inicio_intervalo.value);
+    var fim = Number(input_fim_intervalo.value);
+
+    var intervalo = fim - inicio;
+
+    
+  }
+
+
+</script>

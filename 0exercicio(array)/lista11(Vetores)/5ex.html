@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    insira seus filmes favoritos: <input type="text" id="ipt_filme">
+    <button onclick="cadastrar()">Cadastrar filme</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var listaDeFilmes = [];
+
+    function cadastrar() {
+        var mensagem = '';
+        var filme = ipt_filme.value;
+        listaDeFilmes.push(filme);
+        console.log(listaDeFilmes);
+        ipt_filme.value = '';
+
+        var favorito = listaDeFilmes[0];
+        var total = listaDeFilmes.length;
+        var terceiro;
+
+        if (listaDeFilmes.length >= 3) {
+            terceiro = listaDeFilmes[2]
+
+        } else {
+            terceiro = `ainda nao existe`;
+        }
+
+        mensagem += `Seu fileme favorito:${favorito}<br>
+                                    Seu terceiro filme favorito ${terceiro}<br>
+                                    total de filmes cadastrados é ${total};`
+
+        div_mensagem.innerHTML = mensagem
+    }
+
+
+</script>
+
+<!-- 5. Crie um programa o qual: 
+
+a) Usuário cadastre os nomes de seus filmes favoritos e adiciona cada um ao clicar em "Cadastrar Filme";
+
+b) Na medida em que vai cadastrando, deve ser exibido ou atualizado um "painel" como neste exemplo: 
+
+  Seu filme favorito: Donnie Darko
+
+  Seu 3º filme favorito: A era do gelo 1 
+
+  Total de filmes cadastrados: 5 
+
+Obs: no "3º filme", caso não tenham sido cadastrados ainda 3 filmes, exibir "Ainda não existe". 
+
+Obs: o "Filme favorito" é o primeiro cadastrado. -->
+
+
+
+<!-- // if (listaDeFilmes.length > 0) {
+    //     var ultimoFilme = listaDeFilmes[listaDeFilmes.length - 1];
+    //     var numeroDeFilmes = listaDeFilmes.length;
+    //     var filmeFavorito = listaDeFilmes[0];
+    //     var mensagem = `Seu filme favorito: ${filmeFavorito}<br>Seu ${numeroDeFilmes}º filme favorito: ${ultimoFilme}`;
+    // } else {
+    //     mensagem = 'Ainda não existe';
+    // } -->

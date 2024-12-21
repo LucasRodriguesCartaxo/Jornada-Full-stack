@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Nome: <input type="text" id="input_nome" /> <br />
+    Sobrenome: <input type="text" id="input_sobrenome" /> <br />
+
+    <button id="teste_cadastro" onclick="cadastrar()">Cadastrar</button>
+    <button onclick="exibir()">Exibir</button>
+
+    <div id="div_mensagem" style="display: flex; flex-wrap: nowrap"></div>
+  </body>
+</html>
+
+<script>
+  var lista_nomes = [];
+  var lista_sobrenomes = [];
+
+  function cadastrar() {
+    var nome = input_nome.value;
+    var sobrenome = input_sobrenome.value;
+
+    lista_nomes.push(nome);
+    lista_sobrenomes.push(sobrenome);
+
+    div_mensagem.innerHTML = `<b style="color: green"> ${nome} ${sobrenome} foi cadastrado com sucesso! </b>`;
+  }
+
+  function exibir() {
+    var mensagem = "";
+
+    for (var index = 0; index < lista_nomes.length; index++) {
+      // usa o mesmo índice para acessar ambas as listas
+      var nome = lista_nomes[index];
+      var sobrenome = lista_sobrenomes[index];
+
+      mensagem += `Contato ${index + 1} - ${nome} ${sobrenome}<br>`;
+    }
+
+    div_mensagem.innerHTML = mensagem;
+  }
+</script>

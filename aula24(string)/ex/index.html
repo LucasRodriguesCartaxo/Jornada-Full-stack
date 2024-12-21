@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercio string</title>
+
+</head>
+
+<body>
+    <script>
+
+        const nomeCompleto = prompt("digite seu nome completo"); // OBS: o valor que o usuario digitar será armazenado na const nome
+        document.body.innerHTML = `O seu nome é: <b>${nomeCompleto}</b> <br>`;
+        document.body.innerHTML += `O seu nome tem:<b>${nomeCompleto.length}</b> letras <br>`;
+        document.body.innerHTML += `A segunda letra do seu nome é: <b>${nomeCompleto[1]}</b> letras <br>`;
+        document.body.innerHTML += `Qual o primeiro indice da letra 'A' no  seu nome é : <b>${nomeCompleto.indexOf('a')}</b> <br>`;
+        document.body.innerHTML += `Qual o ultimo indice da letra 'A' do seu nome é : <b>${nomeCompleto.lastIndexOf('a', '23')}</b> <br>`;
+        document.body.innerHTML += `As ultimas 3 letras do seu nome são : <b>${nomeCompleto.slice(-3)}</b><br>`;
+        document.body.innerHTML += `As pavalras do seu nome são : <b>${nomeCompleto.split(' ')}</b> <br>`;
+        document.body.innerHTML += `Seu nome com letras maisculas :<b>${nomeCompleto.toLocaleUpperCase()}</b> <br>`;
+        document.body.innerHTML += `Seu nome com letras minusculas :<b>${nomeCompleto.toLowerCase()}</b>  <br>`;
+
+
+    </script>
+</body>
+
+</html>

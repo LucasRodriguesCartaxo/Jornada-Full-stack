@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    insira os nomes do filmes que voce masi gosta: <input type="text" name="" id="ipt_nomes"><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var listaNomes = [];
+
+    function cadastrar() {
+        var mensagem = '';
+        var nomesDeFilmes = ipt_nomes.value;
+
+        if (nomesDeFilmes === '') {
+            alert("Por favor, insira o nome de um filme.");
+            return;
+        }
+
+        listaNomes.push(nomesDeFilmes);
+        console.log(nomesDeFilmes);
+        ipt_nomes.value = '';
+
+        for (var i = 0; i < listaNomes.length; i++) {
+            mensagem += `${i + 1} seu filme favorito é ${listaNomes[i]}<br>`  // ${i+1} aqui estou fazendo um 'tratamento' para o usuario 
+                                                                              //pois ele acharia estranho a contagem se inicar com 0;
+                                                                              //${listanomes[i]} aqui estou colando o indice dor for 'dentro'
+                                                                              // do array para me indicar a posicao di filme.
+                                                                              //                     0            1        2
+                                                                              // var exemplo = [era do gelo , a origem, carros]
+                                                                              // era do gelo é indice 0 porem eu colquei +1 somente pro usuario. 
+        }
+
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>
+<!-- 6. Crie um programa o qual:
+a) O usuário informa os nomes dos filmes que mais gosta e clica em "Cadastrar"; 
+b) Na medida em que vai cadastrando, os filmes vão aparecendo um abaixo do outro, abaixo do botão.  -->

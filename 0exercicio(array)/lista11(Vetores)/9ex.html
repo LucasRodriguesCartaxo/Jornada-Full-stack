@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    nome de cada projeto: <input type="text" id="ipt_projeto"><br>
+    <button onclick="ver()">Registrar Projetos</button>
+    <button onclick="mostrar()">Mostrar Projetos</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var listaDeProjetos = [];
+
+    function ver() {
+        var mensagem = '';
+        var projetos = ipt_projeto.value;
+        listaDeProjetos.push(projetos);
+        console.log(listaDeProjetos);
+        ipt_projeto.value = '';
+        var xp = ''
+
+        if (listaDeProjetos.length < 5) {
+            xp = 'Junior'
+            mensagem += `voce ja fez ${listaDeProjetos.length}. Por isso voce é um profissional ${xp}`
+
+        } else if (listaDeProjetos.length <= 12) {
+            xp = 'Pleno'
+            mensagem += `voce ja fez ${listaDeProjetos.length}. Por isso voce é um profissional ${xp}`
+
+        } else {
+            xp = 'Senior'
+            mensagem += `voce ja fez ${listaDeProjetos.length}. Por isso voce é um profissional ${xp}`
+        }
+        div_mensagem.innerHTML = mensagem
+    }
+
+
+
+    function mostrar() {                                                                 
+        var mensagem = '';                                                               
+        // for(var i =0; i<= listadeprojetos.length -1; i++){}
+        for (var i = listaDeProjetos.length - 1; i >= 0; i--) {
+            mensagem += `${i + 1} o nome do projeto é ${listaDeProjetos[i]}<br>`
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>
+<!-- 9. Crie um programa o qual:
+
+a) Pergunte ao usuário o nome de cada projeto que já criou na vida. Ele digita e clica em "Registrar projeto". Na medida
+em que vai cadastrando, verifique quantos projetos já foram cadastrados e exiba o seguinte texto abaixo:
+
+Você já fez X projetos. Por isso você é um profissional Z
+
+X é a quantidade de projetos e Z é seu nível de experiência, segundo estas regras:
+
+0 a 4: Júnior
+
+5 a 12: Pleno
+
+13 ou mais: Sênior
+
+b) Tenha um botão “Mostrar Projetos” que quando clicado mostra os projetos cadastrados, um abaixo do outro, em ordem
+inversa ao que foi cadastrado. -->

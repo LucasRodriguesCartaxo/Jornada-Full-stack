@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    nome: <input type="text" name="" id="ipt_nome"><br>
+    <button onclick="Cadastrar()">Cadastrar</button>
+    <button onclick="Atualizar()">Atualizar Familia</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+
+    var listaDeFilhos = [];
+    function Cadastrar() {
+        var nome = ipt_nome.value;
+
+
+        if (listaDeFilhos.includes(nome)) {
+            alert(`Não pode mais de 1 filho com o mesmo nome!`)
+
+        } else {
+            listaDeFilhos.push(nome);
+            ipt_nome.value = '';
+            console.log(listaDeFilhos);
+        }
+    }
+
+    function Atualizar() {
+        var mensagem = '';
+
+        var quantidadeDeFilhos = listaDeFilhos.length;
+        var particular = 3000;
+        var publica = 1500;
+
+        for (var i = 0; i < listaDeFilhos.length - 1; i++) {
+            mensagem += `voce tem: ${quantidadeDeFilhos} filhos<br>
+                      Seu custo mensal será aproximadamente R${quantidadeDeFilhos * particular} se colocá-los em escola particular ou R$${quantidadeDeFilhos * publica} se eles estudarem em escola pública`
+        }
+        div_mensagem.innerHTML = mensagem
+    }
+</script>
+
+<!-- a) Pergunte ao usuário o nome de um de seus nome; 
+
+b) Ao clicar em "Cadastrar", o nome do filho fica cadastrado num lugar que o usuário não vê, porém não permita o cadastro de nomes repetidos.  
+
+b.1) Em caso de tentativa de nome repetido, exiba um alert com a frase "Não pode mais de 1 filho com o mesmo nome!"  
+
+c) Ao clicar em "Atualizar Família", deve aparecer um texto como este abaixo:  
+
+   Você tem X nome  
+
+   Seu custo mensal será aproximadamente R$Y se colocá-los em escola particular ou R$Z se eles estudarem em escola pública  
+
+   Em que X é a quantidade de nome cadastrados.  
+
+   Y é o resultado do seguinte cálculo: nome x 3000 
+
+   Z é o resultado do seguinte cálculo: nome x 1500  -->

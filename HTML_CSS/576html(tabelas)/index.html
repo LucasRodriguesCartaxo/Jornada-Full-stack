@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 800px;
+        }
+
+        table caption {
+            font-size: 20px;
+            caption-side: bottom;
+            text-align: right;
+            font-style: italic;
+            font-size: 14px;
+            margin: 5px 0;
+
+        }
+
+        table td,
+        table th {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: left;
+        }
+
+        tfoot td,
+        th {
+            background: #ddd;
+        }
+
+        tfoot td {
+            font-style: italic;
+        }
+
+        .responsive-table{
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+
+    <div class="responsive-table">
+        <table>
+            <caption>Tabela dos bordas</caption>
+            <thead>
+                <tr>
+                    <th>padoru mestre</th>
+                    <th>padoru bordeiro</th>
+                    <th>padoru recruta</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Tomaz</td>
+                    <td>Lucas</td>
+                    <td>Pedro</td>
+                </tr>
+                <tr>
+                    <td colspan="2">padoru</td>
+                    <td>Rafael</td>
+                </tr>
+                <tr>
+                    <td>#</td>
+                    <td>Leo</td>
+                    <td>calace</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="2" rowspan="2"></td>
+                    <td rowspan="">TOTAL: </td>
+                </tr>
+                <tr>
+                    <td>R$555</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+
+</html>

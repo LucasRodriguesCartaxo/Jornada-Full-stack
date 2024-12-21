@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - Auto Posto Anil Osag</title>
+</head>
+<body>
+    <h1>Controle de Estoque</h1>
+
+    <!-- Formulário para entrada de produto -->
+    <h2>Compra de Produto</h2>
+    Nome do produto: <input type="text" id="input_nome_compra"><br>
+    Quantidade comprada: <input type="number" id="input_quantidade_compra"><br>
+    <button onclick="comprarProduto()">Registrar Compra</button>
+
+    <!-- Formulário para saída de produto -->
+    <h2>Venda de Produto</h2>
+    Nome do produto: <input type="text" id="input_nome_venda"><br>
+    Quantidade vendida: <input type="number" id="input_quantidade_venda"><br>
+    <button onclick="venderProduto()">Registrar Venda</button>
+
+    <!-- Área para exibir o estoque -->
+    <h2>Estoque Atual</h2>
+    <div id="div_estoque"></div>
+</body>
+</html>
+
+<script>
+    // Vetores para armazenar produtos e suas quantidades
+    var produtos = [];
+    var quantidades = [];
+
+    function comprarProduto() {
+        var nomeProduto = input_nome_compra.value;
+        var quantidadeComprada = parseInt(input_quantidade_compra.value);
+
+        // Verifica se o produto já existe no estoque
+        var index = produtos.indexOf(nomeProduto);
+
+        if (index === -1) {
+            // Novo produto - adiciona ao estoque
+            produtos.push(nomeProduto);
+            quantidades.push(quantidadeComprada);
+        } else {
+            // Produto já existe - atualiza a quantidade
+            quantidades[index] += quantidadeComprada;
+        }
+
+        // Limpa os campos de entrada
+        input_nome_compra.value = '';
+        input_quantidade_compra.value = '';
+
+        // Atualiza a exibição do estoque
+        exibirEstoque();
+    }
+
+    function venderProduto() {
+        var nomeProduto = input_nome_venda.value;
+        var quantidadeVendida = parseInt(input_quantidade_venda.value);
+
+        // Verifica se o produto existe no estoque
+        var index = produtos.indexOf(nomeProduto);
+
+        if (index === -1) {
+            alert(`Produto ${nomeProduto} não encontrado no estoque!`);
+        } else if (quantidadeVendida > quantidades[index]) {
+            alert(`Quantidade insuficiente em estoque para vender ${quantidadeVendida} unidades de ${nomeProduto}.`);
+        } else {
+            // Atualiza a quantidade no estoque após a venda
+            quantidades[index] -= quantidadeVendida;
+        }
+
+        // Limpa os campos de entrada
+        input_nome_venda.value = '';
+        input_quantidade_venda.value = '';
+
+        // Atualiza a exibição do estoque
+        exibirEstoque();
+    }
+
+    function exibirEstoque() {
+        var estoque = '';
+
+        // Exibe cada produto com a quantidade disponível
+        for (var i = 0; i < produtos.length; i++) {
+            estoque += `Produto: ${produtos[i]} - Quantidade em estoque: ${quantidades[i]}<br>`;
+        }
+
+        div_estoque.innerHTML = estoque;
+    }
+</script>

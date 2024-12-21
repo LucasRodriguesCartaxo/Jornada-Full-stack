@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+insira nomes dos alunos: <input type="text" id="ipt_nomes"><br>
+<button onclick="ver()">Cadastrar</button>
+<div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+ var listaDeNomes = [];
+
+function ver(){
+    var mensagem = '';
+    var nomes = ipt_nomes.value;
+    listaDeNomes.push(nomes);
+    console.log(listaDeNomes);
+    ipt_nomes.value = '';
+
+    if (listaDeNomes ==='') {
+       mensagem +=`voce nao colocou nome` 
+    }
+
+    for(var i = listaDeNomes.length -1; i >= 0; i--){
+        mensagem +=`${i+1} o nome é ${listaDeNomes[i]}<br>`
+    }
+    div_mensagem.innerHTML = mensagem
+}
+</script>
+<!-- // for ( var i = lista.leght; i > 0; i-- ;) -->
+
+<!-- a) O usuário cadastre nomes de alunos;
+
+b) Porém, na medida que vai cadastrando, aparecem um abaixo do outro na ordem inversa em que foram cadastrados (ou seja,
+o último sempre fica no topo, o penúltimo em abaixo dele e assim por diante) -->

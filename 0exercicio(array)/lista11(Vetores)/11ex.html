@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    insira um preço de um produto: <input type="number" id="ipt_numero"><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="atualizar()">Atualizar</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var listaDePreco = [];
+
+    function cadastrar() {
+        var preco = Number(ipt_numero.value);
+        listaDePreco.push(preco);
+        console.log(listaDePreco);
+        ipt_numero.value = '';
+    }
+
+    function atualizar() {
+        var mensagem = '';
+        var somaEstoque = 0; // Soma dos preços cadastrado
+
+        for (var i = listaDePreco.length - 1; i >= 0; i--) {
+            mensagem += `Produto : ${i + 1} tem o preço de : ${listaDePreco[i].toFixed(2)}<br>`
+            somaEstoque += listaDePreco[i] // Soma o preço ao total do estoque 
+        }
+
+        mensagem +=`Voce tem ${listaDePreco.length} cadastrados em estoque. <br>`
+        mensagem +=`Seu estoque vale R$${somaEstoque.toFixed(2)}`
+
+        div_mensagem.innerHTML = mensagem
+    }
+</script>
+<!-- 11. Crie um programa o qual:  
+
+a) Pergunte ao usuário o preço de um produto; 
+
+b) Ao clicar em "Cadastrar", o preço fica cadastrado num lugar que o usuário não vê; 
+
+c) Ao clicar em "Atualizar Estoque", deve aparecer a lista de preços cadastrados (em ordem inversa) e  um texto como este abaixo:  
+
+   Você tem X produtos cadastrados em estoque  
+
+   Seu estoque vale R$Y 
+
+Em que X é a quantidade de produtos cadastrados pelo usuário e Y é a soma de todos os valores.  -->

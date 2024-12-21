@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produtos</title>
+</head>
+<body>
+    <h1>Cadastro de Produtos</h1>
+
+    
+    Nome do Produto: <input type="text" id="input_nome"><br>
+    Preço do Produto: <input type="number" id="input_preco"><br>
+    <button onclick="cadastrarProduto()">Cadastrar</button><br>
+
+    
+    <div id="div_mensagem"></div><br>
+
+    
+    <button onclick="atualizarEstoque()">Atualizar Estoque</button><br>
+
+    
+    <div id="div_estoque"></div><br>
+
+    <h2>Filtrar Produtos</h2>
+    
+    <select id="select_filtro">
+        <option value="acima">Preços acima de</option>
+        <option value="abaixo">Preços abaixo de</option>
+    </select>
+    Valor: <input type="number" id="input_valor"><br>
+    <button onclick="filtrarProdutos()">Filtrar Produtos</button><br>
+
+    
+    <div id="div_filtrados"></div>
+
+</body>
+</html>
+
+<script>
+    
+    var produtos = [];
+
+    
+    function cadastrarProduto() {
+        var nome = input_nome.value;
+        var preco = parseFloat(input_preco.value);
+
+        
+        if (nome.length >= 3 && preco > 0) {
+            produtos.push({ nome: nome, preco: preco });
+            div_mensagem.innerHTML = "Produto cadastrado com sucesso!";
+        } else {
+            div_mensagem.innerHTML = "Erro! O nome deve ter pelo menos 3 letras e o preço deve ser positivo.";
+        }
+
+       
+        input_nome.value = '';
+        input_preco.value = '';
+    }
+
+    
+    function atualizarEstoque() {
+        var listaProdutos = '';
+        var totalEstoque = 0;
+
+        
+        for (var i = 0; i < produtos.length; i++) {
+            listaProdutos += `${i + 1}. ${produtos[i].nome} - R$${produtos[i].preco.toFixed(2)}<br>`;
+            totalEstoque += produtos[i].preco;
+        }
+
+        div_estoque.innerHTML = `Você tem ${produtos.length} produtos cadastrados em estoque:<br>` + listaProdutos;
+        div_estoque.innerHTML += `Seu estoque vale R$${totalEstoque.toFixed(2)}`;
+    }
+
+    
+    function filtrarProdutos() {
+        var filtro = select_filtro.value;
+        var valor = parseFloat(input_valor.value);
+        var listaFiltrada = '';
+
+        
+        for (var i = 0; i < produtos.length; i++) {
+            if (filtro === "acima" && produtos[i].preco > valor) {
+                listaFiltrada += `${produtos[i].nome} - R$${produtos[i].preco.toFixed(2)}<br>`;
+            } else if (filtro === "abaixo" && produtos[i].preco < valor) {
+                listaFiltrada += `${produtos[i].nome} - R$${produtos[i].preco.toFixed(2)}<br>`;
+            }
+        }
+
+        if (listaFiltrada === '') {
+            div_filtrados.innerHTML = "Nenhum produto encontrado com o filtro especificado.";
+        } else {
+            div_filtrados.innerHTML = "Produtos filtrados:<br>" + listaFiltrada;
+        }
+    }
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Nome: <input type="text" id="input_nome" /> <br />
+    Sobrenome: <input type="text" id="input_sobrenome" /> <br />
+
+    <button id="teste_cadastro" onclick="cadastrar()">Cadastrar</button>
+    <button onclick="exibir()">Exibir</button>
+
+    <div id="div_mensagem" style="display: flex; flex-wrap: nowrap"></div>
+  </body>
+</html>
+
+<script>
+  var lista_nomes = [];
+
+  function cadastrar() {
+    var nome = input_nome.value;
+    var sobrenome = input_sobrenome.value;
+
+    var nome_completo = `${nome} ${sobrenome}`; // interpola/concatena ambas informações em um único texto
+
+    lista_nomes.push(nome_completo); // adiciona o nome completo à lista
+
+    div_mensagem.innerHTML = `<b style="color: green"> ${nome_completo} foi cadastrado com sucesso! </b>`;
+  }
+
+  function exibir() {
+    var mensagem = "";
+
+    for (var index = 0; index < lista_nomes.length; index++) {
+      var nome_atual = lista_nomes[index]; 
+      mensagem += `Contato ${index + 1} - ${nome_atual}<br>`;
+    }
+
+    div_mensagem.innerHTML = mensagem;
+  }
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Terceiro exercício for array (JP)</title>
+</head>
+<body>
+    Bairros que você já morou: <input type="text" id="ipt_bairro"><br>
+    <button onclick="cadastrar()">Cadastrar bairro</button><br>
+    Local onde morou (número): <input type="number" id="ipt_morar"><br>
+    <button onclick="relembrar()">Relembrar moradia</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+
+<script>
+    // Cria uma lista (array) vazia onde os bairros serão armazenados
+    var cadastro = [];
+
+    // Função para cadastrar o bairro digitado pelo usuário
+    function cadastrar() {
+        var bairro = ipt_bairro.value; // Captura o nome do bairro digitado
+        cadastro.push(bairro); // Adiciona o bairro na lista
+        ipt_bairro.value = ''; // Limpa o campo após o cadastro
+        console.log(cadastro); // Exibe o array no console para conferência
+    }
+
+    // Função para relembrar o bairro onde morou, baseado no número digitado
+    function relembrar() {
+        // Pega o número digitado e transforma em um número que o computador entende
+        var numero = parseInt(ipt_morar.value); 
+
+        // Prepara uma mensagem vazia para armazenar o resultado
+        var mensagem = '';
+
+        // Ajusta o índice, pois o usuário conta a partir de 1 e não de 0
+        var indice = numero - 1; 
+
+        // Verifica se o número é válido:
+        // - Maior ou igual a 0, para garantir que estamos dentro da lista
+        // - Menor do que o total de bairros cadastrados
+        if (indice >= 0 && indice < cadastro.length) {
+            // Se o número é válido, mostra o bairro correspondente
+            mensagem = `Você morou no bairro: ${cadastro[indice]}`;
+        } else {
+            // Se o número é maior do que a quantidade de bairros cadastrados
+            mensagem = `Você ainda não morou num ${numero}º bairro!`;
+        }
+
+        // Exibe a mensagem no div
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>
+
+
+<!-- 3. Crie um programa o qual:
+
+a) O usuário vá cadastrando os bairros onde morou; Ele digitará o nome do lugar em um campo e clicará em "Cadastrar bairro". 
+
+b) Deve haver um outro campo, em que digita apenas um número, indicando o local onde morou, a partir do número 1 (porque os usuários comuns contam as coisas assim).
+
+c) Após clicar em "Relembrar moradia", faça: 
+
+
+c.1) Se ele informar "1", exiba o primeiro bairro cadastrado; Se informar "2", exiba o segundo bairro cadastrado e assim por diante ... 
+
+c.2) Porém, ao informar um número maior do que a quantidade de bairros cadastrados, exiba: 
+
+"Você ainda não morou num Xº bairro!"  -->

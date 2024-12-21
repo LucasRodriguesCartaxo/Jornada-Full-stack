@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Linha: <input type="text" id="ipt_linha"><br>
+    <button onclick="gravar()">Gravar busão</button><br>
+    pesquisa: <input type="text" id="ipt_pesquisa"><br>
+    <button onclick="pesquisa()">Pesquisa</button>
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var listaDeLinhas = [];
+
+    function gravar() {
+        var mensagem = '';
+        var linhas = ipt_linha.value;
+        listaDeLinhas.push(linhas);
+        console.log(listaDeLinhas);
+        ipt_linha.value = '';
+
+        for (var i = listaDeLinhas.length - 1; i >= 0; i--) {
+            mensagem += `${i + 1} linha registrada: ${listaDeLinhas[i]}<br>`
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+
+    function pesquisa() {
+        var listaDeIndices = [];
+        var pesquisa = ipt_pesquisa.value;
+        console.log(listaDeIndices);
+        ipt_pesquisa.value = '';
+
+        if (listaDeLinhas.includes(pesquisa)) {
+            for (var i = 0; i < listaDeLinhas.length; i++) {
+                var linhaAtual = listaDeLinhas[i];
+
+                if (linhaAtual == pesquisa) {
+                    listaDeIndices.push(i + 1)
+                }
+            }
+
+            div_mensagem.innerHTML = `Voce ja pegou essa linha ${listaDeIndices.length} vezes, nessa ordem ${listaDeIndices}`;
+
+        } else {
+            div_mensagem.innerHTML = `voce nunca pegou essa linha`;
+        }
+    }
+</script>
+<!-- a) O usuário vá registrando os nomes das linhas de ônibus que ele pegou durante a semana. Ele digita o nome da linha e
+clica em "Gravar busão";
+
+b) Cada vez que o botão é clicado o programa deve mostrar a lista de linhas de ônibus abaixo do botão e em ordem inversa
+(do último para o primeiro);
+
+c) Deve haver outro campo em que ele pesquisa por uma linha que já tenha pego. Ao clicar em "Pesquisar", deve ver uma
+dessas frases, abaixo da lista de linhas de ônibus que já pegou:
+
+Você nunca pegou essa linha (caso não tenha cadastrado a linha em questão)
+
+OU
+
+Você já pegou essa linha 4 vezes, nessa ordem: 2, 4, 8, 9
+
+(supondo que ele cadastrou a mesma linha na 2ª vez, na 4ª vez, na 8ª vez e na 9ª vez). -->

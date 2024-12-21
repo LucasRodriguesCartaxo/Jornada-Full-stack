@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        nav{    
+            background-color: red;
+            display: flex; 
+            align-items: center;
+        }
+
+        nav a{
+            color: white;
+            text-decoration: none;
+            font-family: sans-serif;
+            background: red;
+            padding: 10px 20px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            background-color: rgba(0, 0, 255, 0.473);
+            transition: 0.4s linear;
+        }
+
+        nav ul{
+            display: flex;
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Products</a></li>
+        </ul>
+    </nav>
+    <ul>
+        <li>lista nao ordenada1</li>
+        <li>lista nao ordenada2</li>
+        <li>lista nao ordenada3</li>
+    </ul>
+
+    <ol type="1" start="7">
+        <li>lista ordenada1</li>
+        <li>lista ordenada2</li>
+        <li>lista ordenada3</li>
+    </ol>
+
+    <dl>
+        <dt>Café</dt>
+        <dd>bebida gelada</dd>  
+        <dt>Mouse</dt>
+        <dd>pra delirar no cszin</dd>
+    </dl>
+</body>
+
+</html>

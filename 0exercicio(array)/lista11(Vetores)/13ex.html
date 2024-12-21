@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campanha do Time</title>
+</head>
+<body>
+   
+    Indique o resultado:
+    <select id="resultado_combo">
+        <option value="vitoria">Vitória</option>
+        <option value="empate">Empate</option>
+        <option value="derrota">Derrota</option>
+    </select>
+    <button onclick="registrarJogo()">Registrar jogo</button>
+
+    <br><br>
+
+    
+    <div id="div_resumo_campanha"></div>
+
+    <br>
+
+    
+    Indique qual jogo deseja saber o resultado:
+    <input type="number" id="input_consulta_jogo" oninput="consultarJogo()">
+    <div id="div_resultado_jogo"></div>
+</body>
+</html>
+
+<script>
+    var lista_resultados = [];
+    var vitorias = 0;
+    var empates = 0;
+    var derrotas = 0;
+
+    function registrarJogo() {
+        var resultado = resultado_combo.value; 
+        lista_resultados.push(resultado);
+
+        
+        if (resultado === "vitoria") {
+            vitorias++;
+        } else if (resultado === "empate") {
+            empates++;
+        } else if (resultado === "derrota") {
+            derrotas++;
+        }
+
+      
+        var pontos = (vitorias * 3) + (empates * 1);
+        var total_jogos = lista_resultados.length;
+        var pontos_possiveis = total_jogos * 3;
+        var aproveitamento = ((pontos / pontos_possiveis) * 100).toFixed(2);
+
+       
+        var mensagem_resumo = `
+            O time teve: ${vitorias} vitórias, ${empates} empates, ${derrotas} derrotas <br>
+            Pontuação total: ${pontos} pontos <br>
+            Aproveitamento: ${aproveitamento}% <br>
+        `;
+        
+        div_resumo_campanha.innerHTML = mensagem_resumo; 
+    }
+
+    function consultarJogo() {
+        var numero_jogo = Number(input_consulta_jogo.value) - 1; 
+
+        
+        if (numero_jogo >= 0 && numero_jogo < lista_resultados.length) {
+            var resultado = lista_resultados[numero_jogo];
+            var mensagem_resultado;
+
+            // Determina o resultado do jogo específico
+            if (resultado === "vitoria") {
+                mensagem_resultado = "Ganhou";
+            } else if (resultado === "empate") {
+                mensagem_resultado = "Empatou";
+            } else if (resultado === "derrota") {
+                mensagem_resultado = "Perdeu";
+            }
+
+           
+            div_resultado_jogo.innerHTML = `No ${numero_jogo + 1}º jogo, o time ${mensagem_resultado}`;
+        } else {
+            // Caso o jogo não tenha sido cadastrado
+            div_resultado_jogo.innerHTML = `Não foi cadastrado um ${numero_jogo + 1}º jogo`;
+        }
+    }
+</script>
+
+
+<!-- a) Cadastre a campanha de um time de futebol num campeonato da seguinte forma:
+
+a.1) Tenha um 'combo' (select/option) identificado com o texto "Indique o resultado" com os itens:
+
+Vitória
+
+Empate
+
+Derrota
+
+b) Ao clicar num botão "Registrar jogo", o resultado escolhido em a) é registrado em um local invisível ao usuário e um
+texto abaixo é exibido (ou atualizado). O texto é como este:
+
+O time teve: V vitórias, E empates, D derrotas
+
+Pontuação total: X pontos
+
+Aproveitamento: Y%
+
+Em que X é calculado assim: Cada vitória (V) vale 3 pontos. Cada empate (E) vale 1 ponto. Cada derrota (D) vale 0
+pontos.
+
+O Y é o total de pontos conquistados (X) dividido pelo total de pontos possíveis (ou seja, considerando que tivesse
+vencido todos os jogos) vezes 100.
+
+c) Deve haver um campo "Indique qual jogo deseja saber o resultado". Na medida em que vai digitando, aparece um texto,
+abaixo do texto de b) como este:
+
+No XXº jogo, o time Ganhou (ou "Perdeu" ou "Empatou")
+
+ou um texto como este, caso o valor seja de um jogo que não foi cadastrado:
+
+Não foi cadastrado um XXº jogo
+
+Obs: Neste item considere que o usuário ache que 1 indica o 1º jogo. Ou seja, o usuário não imagina que o 1º é o jogo
+"0" na verdade. -->
