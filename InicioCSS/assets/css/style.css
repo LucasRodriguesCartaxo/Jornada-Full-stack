@@ -1,5 +1,35 @@
-.caixa{
-    background: blue;
-    height: 120px;
-    width: 120px;
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+div{
+    color: initial;
+    margin-left: 20px;
+}
+
+.pai .filha{
+    color: blue;
+}
+
+p,h1{
+    color: red;
+}
+
+body div section p,
+body div section h1 {
+    color: yellow;
+}
+
+.main-content h1,
+.main-content p{
+    color: green;
+    font-family: sans-serif;
+    font-style: italic;
+}
+
+.padoru h1,h2,h3.heading,
+.padoru p{
+    color: brown;
 }
