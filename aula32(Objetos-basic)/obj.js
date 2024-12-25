@@ -45,8 +45,7 @@ console.log(people1.nome);     // output vai exibir somente ->>> lucas;
 console.log(people5.nome);     // output vai exibir somente ->>> fallen;
 console.log(people3.sobrenome);// output vai exibir somente ->>> tomaz; 
 console.log(people1.nome, people2.nome, people3.nome, people4.nome, people5.nome);//output vai exibir ->>>lucas pedro padoru suveco fallen;
-
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
 const person1 = {
     nome: 'lucas',
     sobrenome: 'rodrigues',
